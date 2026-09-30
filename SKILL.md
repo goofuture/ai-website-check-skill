@@ -66,6 +66,15 @@ python3 ai_check/cli.py check "https://example.com/" --out ./reports --submit
 - 公开报告页： `https://goofuture.com/company-website-ai-agent/ai-check/reports/{domain}-report.html`
 - SKILL 下载： `https://goofuture.com/company-website-ai-agent/ai-check/skill.php?domain={domain}`
 
+> **提交流程约定（避免重复提交）**
+> 1. 先用 `check`（不带 `--submit`）跑出分数与本地报告，向用户展示；
+> 2. **只问一次**用户「是否公开收录到 GooFuture 官网」；
+> 3. 用户同意后，**只执行一次提交**，优先用 `check --submit`（它顺带把本地报告也生成好）。
+>    **不要**再单独跑 `submit` 子命令——`submit` 与 `check --submit` 是同一个收录接口，
+>    两个都跑会对同一域名产生两次提交（覆盖同一条记录，并触发两次企业微信通知）。
+> 4. 工具已内置本地去重：同一域名 10 分钟内重复提交会自动跳过并提示；
+>    若确要刷新线上报告（如改站后），加 `--force` 强制重提。
+
 ### 4）（可选）带 AI 深度解读
 
 设置环境变量 `DEEPSEEK_API_KEY` 并加 `--ai`，会自动调用 DeepSeek 生成「AI 深度解读」，
@@ -80,6 +89,7 @@ python3 ai_check/cli.py check "https://example.com/" --out ./reports --submit --
 
 1. **提交前必须征求用户同意**：把网站数据回传到 GooFuture（第三方）属于对外提交，
    动手 `submit` / `check --submit` 之前，先向用户确认「是否要把这份检测结果公开收录到 GooFuture 官网」。
+   确认后**只提交一次**（推荐 `check --submit`，不要 `submit` 与 `check --submit` 都跑）。
 2. **不要编造数据**：评分完全由程序对公开页面计算得出；AI 解读由 DeepSeek 生成，
    若解读中出现「作为大模型我不了解这家公司」之类的免责表述，**不要**把它写进给客户的开发信。
 3. **本地与官网口径一致**：评分逻辑是 GooFuture 线上 PHP 版本的权威移植，

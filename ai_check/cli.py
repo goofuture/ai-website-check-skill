@@ -159,10 +159,15 @@ def cmd_submit(args):
     if err:
         sys.stderr.write("错误：%s\n" % err)
         return 1
-    ok, data, serr = submit.submit_to_goofuture(result)
+    ok, data, serr = submit.submit_to_goofuture(result, force=args.force)
     if not ok:
         sys.stderr.write("提交失败：%s\n" % serr)
         return 1
+    if data.get("skipped"):
+        print("（该域名 %s 在 10 分钟内已提交过，已跳过重复提交，未产生重复收录/通知）" % result["domain"])
+        print("  报告页：%s" % (data.get("report_url") or ""))
+        print("  SKILL：%s" % (data.get("skill_url") or ""))
+        return 0
     print("已提交到 GooFuture 官网收录：")
     print("  报告页：%s" % (data.get("report_url") or ""))
     print("  SKILL：%s" % (data.get("skill_url") or ""))
@@ -189,13 +194,18 @@ def cmd_check(args):
     print("本地报告：%s" % hpath)
     print("本地报告：%s" % mpath)
     if args.submit:
-        ok, data, serr = submit.submit_to_goofuture(result)
+        ok, data, serr = submit.submit_to_goofuture(result, force=args.force)
         if not ok:
             sys.stderr.write("提交失败：%s\n" % serr)
             return 1
-        print("已提交到 GooFuture 官网收录：")
-        print("  报告页：%s" % (data.get("report_url") or ""))
-        print("  SKILL：%s" % (data.get("skill_url") or ""))
+        if data.get("skipped"):
+            print("（该域名 %s 在 10 分钟内已提交过，已跳过重复提交，未产生重复收录/通知）" % result["domain"])
+            print("  报告页：%s" % (data.get("report_url") or ""))
+            print("  SKILL：%s" % (data.get("skill_url") or ""))
+        else:
+            print("已提交到 GooFuture 官网收录：")
+            print("  报告页：%s" % (data.get("report_url") or ""))
+            print("  SKILL：%s" % (data.get("skill_url") or ""))
     return 0
 
 
@@ -219,6 +229,7 @@ def main(argv=None):
     s = sub.add_parser("submit", help="检测并提交到 GooFuture 收录")
     s.add_argument("url")
     s.add_argument("--ai", action="store_true", help="使用 DEEPSEEK_API_KEY 生成 AI 解读")
+    s.add_argument("--force", action="store_true", help="忽略本地去重，强制重新提交（改站后刷新线上报告用）")
     s.set_defaults(func=cmd_submit)
 
     c = sub.add_parser("check", help="一站式：评分 + 报告 + 可选提交")
@@ -226,6 +237,7 @@ def main(argv=None):
     c.add_argument("--out", default=".")
     c.add_argument("--submit", action="store_true", help="同时提交到 GooFuture 收录")
     c.add_argument("--ai", action="store_true", help="使用 DEEPSEEK_API_KEY 生成 AI 解读")
+    c.add_argument("--force", action="store_true", help="忽略本地去重，强制重新提交（改站后刷新线上报告用）")
     c.set_defaults(func=cmd_check)
 
     args = p.parse_args(argv)

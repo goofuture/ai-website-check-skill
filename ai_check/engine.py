@@ -5,7 +5,7 @@
 所有函数均为纯逻辑，不触网，方便单元测试与嵌入其它工具。
 """
 
-import html
+import html as html_lib
 import re
 
 # ---------------------- 维度名称 / 默认优化建议 ----------------------
@@ -214,7 +214,7 @@ def extract_meta(html, final_url=""):
     title = ""
     m = re.search(r"<title[^>]*>(.*?)</title>", html, re.IGNORECASE | re.DOTALL)
     if m:
-        title = html.unescape(re.sub(r"<[^>]+>", "", m.group(1))).strip()
+        title = html_lib.unescape(re.sub(r"<[^>]+>", "", m.group(1))).strip()
     desc = ""
     m = re.search(
         r'<meta[^>]+name=["\']description["\'][^>]*content=["\']([^"\']*)["\']',
@@ -226,7 +226,7 @@ def extract_meta(html, final_url=""):
             html, re.IGNORECASE,
         )
     if m:
-        desc = m.group(1).strip()
+        desc = html_lib.unescape(m.group(1)).strip()
     h1 = len(re.findall(r"<h1[^>]*>", html, re.IGNORECASE))
     return {
         "title": title[:120],

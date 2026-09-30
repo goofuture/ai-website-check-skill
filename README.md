@@ -7,10 +7,14 @@
 - 在线体验（GooFuture 托管版）：https://goofuture.com/company-website-ai-agent/ai-check/
 - 本仓库与其评分逻辑**完全一致**，可离线运行、二次开发、嵌入你自己的工具链。  
 
+## 如何使用？
+在Workbuddy上传或安装好`ai-website-check-skill`技能后，即可使用。
+![](images/usage-okayapi-report.png)  
+
+
 示例报告：[goofuture.com 检测报告](https://goofuture.com/company-website-ai-agent/ai-check/reports/goofuture.com-report.html)  
 ![](images/goofuture-report.png)  
 
----
 
 ## 它能做什么
 

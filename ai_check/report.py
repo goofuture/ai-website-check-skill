@@ -113,8 +113,8 @@ def render_html(r):
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:#fff;line-height:1.6}
 .wrap{max-width:840px;margin:0 auto;padding:28px 20px 60px}
 .head{display:flex;gap:22px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:22px}
-.ring{flex:0 0 132px;width:132px;height:132px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;background:conic-gradient(var(--brand) %d%%, #e9ebf2 0);position:relative}
-.ring::after{content:"";position:absolute;inset:12px;border-radius:50%;background:#fff}
+.ring{flex:0 0 132px;width:132px;height:132px;border-radius:50%%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;background:conic-gradient(var(--brand) %d%%, #e9ebf2 0);position:relative}
+.ring::after{content:"";position:absolute;inset:12px;border-radius:50%%;background:#fff}
 .ring b{position:relative;font-size:38px;line-height:1;z-index:1}
 .ring small{position:relative;z-index:1;color:var(--soft);font-size:12px}
 .info h1{margin:0 0 4px;font-size:22px}
@@ -131,7 +131,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang 
 .dim-score{font-weight:700}
 .dim-score.good{color:#0a8f5b}.dim-score.mid{color:#b07d00}.dim-score.low{color:#d23b3b}
 .dim-track{height:8px;background:#eef0f5;border-radius:999px;overflow:hidden}
-.dim-track i{display:block;height:100%;border-radius:999px}
+.dim-track i{display:block;height:100%%;border-radius:999px}
 .dim-track i.good{background:#0a8f5b}.dim-track i.mid{background:#e0a800}.dim-track i.low{background:#d23b3b}
 .advice ul{margin:0;padding-left:18px}
 .advice li{margin:6px 0}
