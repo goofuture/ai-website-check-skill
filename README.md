@@ -1,13 +1,14 @@
 # AI 网站检测 · 开源本地工具与 WorkBuddy 技能
 
-> B-SiteAgent AI · GooFuture 开源实现
-
 一份**纯标准库、零第三方依赖**的「企业官网 AI 可读性」检测工具。它能在你自己的机器上
 抓取企业官网、计算 10 个维度的 AI 可读性评分、生成自包含报告，并**可选**把检测结果
 提交到 [GooFuture 官网](https://goofuture.com/company-website-ai-agent/ai-check/) 进行公开收录。
 
 - 在线体验（GooFuture 托管版）：https://goofuture.com/company-website-ai-agent/ai-check/
-- 本仓库与其评分逻辑**完全一致**，可离线运行、二次开发、嵌入你自己的工具链。
+- 本仓库与其评分逻辑**完全一致**，可离线运行、二次开发、嵌入你自己的工具链。  
+
+示例报告：[goofuture.com 检测报告](https://goofuture.com/company-website-ai-agent/ai-check/reports/goofuture.com-report.html)  
+![](images/goofuture-report.png)  
 
 ---
 
